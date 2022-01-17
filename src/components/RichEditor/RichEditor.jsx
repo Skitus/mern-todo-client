@@ -1,16 +1,17 @@
+// eslint-disable-next-line max-classes-per-file
 import React from 'react';
 import { Editor, RichUtils } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import './RichText.css';
 
 export class RichEditor extends React.Component {
-    onChange = (editorState: any) => {
+    onChange = (editorState) => {
       this.props.onChange('editorState', editorState);
     };
 
     focus = () => this.refs.editor.focus();
 
-    handleKeyCommand = (command: any) => {
+    handleKeyCommand = (command) => {
       const { editorState } = this.props;
       const newState = RichUtils.handleKeyCommand(editorState, command);
       if (newState) {
@@ -20,16 +21,16 @@ export class RichEditor extends React.Component {
       return false;
     };
 
-    onTab = (e: any) => {
+    onTab = (e) => {
       const maxDepth = 4;
       this.onChange(RichUtils.onTab(e, this.props.editorState, maxDepth));
     };
 
-    toggleBlockType = (blockType: any) => {
+    toggleBlockType = (blockType) => {
       this.onChange(RichUtils.toggleBlockType(this.props.editorState, blockType));
     };
 
-    toggleInlineStyle = (inlineStyle: any) => {
+    toggleInlineStyle = (inlineStyle) => {
       this.onChange(
         RichUtils.toggleInlineStyle(this.props.editorState, inlineStyle),
       );
@@ -54,6 +55,8 @@ export class RichEditor extends React.Component {
             editorState={editorState}
             onToggle={this.toggleInlineStyle}
           />
+          {/* eslint-disable-next-line max-len */}
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
           <div className={className} onClick={this.focus}>
             <Editor
               blockStyleFn={getBlockStyle}
@@ -80,7 +83,7 @@ const styleMap = {
     padding: 2,
   },
 };
-function getBlockStyle(block: any) {
+function getBlockStyle(block) {
   switch (block.getType()) {
     case 'blockquote':
       return 'RichEditor-blockquote';
@@ -91,7 +94,7 @@ function getBlockStyle(block: any) {
 class StyleButton extends React.Component {
   constructor() {
     super();
-    this.onToggle = (e: any) => {
+    this.onToggle = (e) => {
       e.preventDefault();
       this.props.onToggle(this.props.style);
     };
@@ -103,6 +106,7 @@ class StyleButton extends React.Component {
       className += ' RichEditor-activeButton';
     }
     return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <span className={className} onMouseDown={this.onToggle}>
         {this.props.label}
       </span>
@@ -121,7 +125,7 @@ const BLOCK_TYPES = [
   { label: 'OL', style: 'ordered-list-item' },
   { label: 'Code Block', style: 'code-block' },
 ];
-function BlockStyleControls(props: any) {
+function BlockStyleControls(props) {
   const { editorState } = props;
   const selection = editorState.getSelection();
   const blockType = editorState
