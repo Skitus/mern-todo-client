@@ -10,9 +10,10 @@ const getStatus = (isComplete: boolean, isPublic: boolean):
 };
 
 class Http {
-    readonly BASE_URL_TODO = 'https://mern-pet-project-todo.herokuapp.com/api/todos';
+    // https://mern-pet-project-todo.herokuapp.com
+    readonly BASE_URL_TODO = 'http://localhost:5000/api/todos';
 
-    readonly BASE_URL_AUTH = 'https://mern-pet-project-todo.herokuapp.com/api/user';
+    readonly BASE_URL_AUTH = 'http://localhost:5000/api/user';
 
     async getAllTodos(
       _id: string,
@@ -73,6 +74,7 @@ class Http {
     }
 
     async registryUser(values: IRegisterForm) {
+      console.log('http register', await axios.post(`${this.BASE_URL_AUTH}/register`, { ...values }));
       return await axios.post(`${this.BASE_URL_AUTH}/register`, { ...values });
     }
 

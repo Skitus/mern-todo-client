@@ -3,7 +3,7 @@ import { Button, Grid, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import './RegisterForm.scss';
 
-function RegisterForm({ handleChange, handleSubmit, values, errors, isValid }: any) {
+function RegisterForm({ handleChange, handleSubmit, values, errors, isValid, userError }: any) {
   return (
     <Grid className="register-wrapper" container justifyContent="space-around">
       <Grid xs={11} sm={11} md={10} lg={10} container justifyContent="center">
@@ -71,6 +71,15 @@ function RegisterForm({ handleChange, handleSubmit, values, errors, isValid }: a
           {errors.checkPassword}
         </Typography>
         )}
+
+        {
+          userError && (
+          <Typography className="error" variant="h6" component="h6" align="center">
+            {`Sorry some went wrong: ${userError}`}
+          </Typography>
+          )
+        }
+
         <Grid container justifyContent="space-between">
           <Grid item xs={12} sm={12} md={3} lg={3}>
             <Button

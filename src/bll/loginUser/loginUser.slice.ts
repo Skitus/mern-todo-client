@@ -23,6 +23,9 @@ export const loginUser = createSlice({
       state.userToken = '';
       localStorage.clear();
     },
+    clearErrors(state) {
+      state.userError = '';
+    },
   },
 
   extraReducers: {
@@ -50,6 +53,6 @@ export const loginUser = createSlice({
   },
 });
 
-export const { logout } = loginUser.actions;
+export const { logout, clearErrors } = loginUser.actions;
 
 export default loginUser.reducer;

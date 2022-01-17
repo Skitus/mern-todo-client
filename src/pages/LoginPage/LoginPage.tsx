@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loginQuery } from '../../bll/loginUser/loginUser.slice';
+import { clearErrors, loginQuery } from '../../bll/loginUser/loginUser.slice';
 import { validationSchemaLogin } from '../../types/validationSchema';
 import { ILoginForm } from '../../types/interfaces';
 import LoginForm from '../../components/LoginForm/LoginForm';
@@ -12,7 +12,7 @@ import './LoginPage.scss';
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userError } = useSelector(loginUserSelector); // ref
+  const { userError } = useSelector(loginUserSelector);
 
   const initialValues: ILoginForm = {
     email: '',
@@ -20,6 +20,7 @@ function LoginPage() {
   };
 
   const onSubmitFormHandler = (values: ILoginForm) => {
+    dispatch(clearErrors());
     dispatch(loginQuery(values));
     navigate('/');
   };
