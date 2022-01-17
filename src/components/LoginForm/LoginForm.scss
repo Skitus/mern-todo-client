@@ -1,0 +1,17 @@
+.login-wrapper {
+  margin: 20px 0px;
+
+  .email-input, .password-input {
+    width: 100%;
+    margin: 20px 0px;
+  }
+
+  .sign-in-button, .register-button, .new-password-button {
+    width: 100%;
+    margin: 7px 0px;
+  }
+
+  .error {
+    color: red;
+  }
+}
