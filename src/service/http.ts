@@ -74,7 +74,6 @@ class Http {
     }
 
     async registryUser(values: IRegisterForm) {
-      console.log('http register', await axios.post(`${this.BASE_URL_AUTH}/register`, { ...values }));
       return await axios.post(`${this.BASE_URL_AUTH}/register`, { ...values });
     }
 

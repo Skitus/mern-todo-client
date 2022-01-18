@@ -23,7 +23,7 @@ export const loginUser = createSlice({
       state.userToken = '';
       localStorage.clear();
     },
-    clearErrors(state) {
+    clearError(state) {
       state.userError = '';
     },
   },
@@ -41,6 +41,7 @@ export const loginUser = createSlice({
         localStorage.setItem('userId', JSON.stringify(state.userId));
         localStorage.setItem('user_name', JSON.stringify(state.userName));
         state.userIsLoading = false;
+        state.userError = '';
       } else {
         state.userIsLoading = false;
         state.userError = action.payload.data.message;
@@ -48,11 +49,10 @@ export const loginUser = createSlice({
     },
     [loginQuery.rejected]: (state, action) => {
       state.userIsLoading = false;
-      state.userError = action.payload.data.message;
     },
   },
 });
 
-export const { logout, clearErrors } = loginUser.actions;
+export const { logout } = loginUser.actions;
 
 export default loginUser.reducer;

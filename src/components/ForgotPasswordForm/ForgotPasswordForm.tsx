@@ -3,12 +3,14 @@ import { Button, Grid, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import './ForgotPasswordForm.scss';
 
-function ForgotPasswordForm({ handleChange,
+function ForgotPasswordForm({
+  handleChange,
   handleSubmit,
   values,
   errors,
   isValid,
-  userErrors }: any) {
+  userError,
+}: any) {
   return (
     <Grid className="forgot-password-wrapper" container justifyContent="space-around">
       <Grid xs={11} sm={11} md={10} lg={10} container justifyContent="center">
@@ -64,12 +66,12 @@ function ForgotPasswordForm({ handleChange,
         )}
 
         {
-          userErrors && (
-          <Typography className="error" variant="h6" component="h6" align="center">
-            {`Sorry some went wrong: ${userErrors}`}
-          </Typography>
-          )
-        }
+                    userError && (
+                    <Typography className="error" variant="h6" component="h6" align="center">
+                      {`Sorry some went wrong: ${userError}`}
+                    </Typography>
+                    )
+                }
 
         <Grid container justifyContent="space-between">
           <Grid item xs={12} sm={12} md={3} lg={3}>
@@ -100,4 +102,5 @@ function ForgotPasswordForm({ handleChange,
     </Grid>
   );
 }
+
 export default ForgotPasswordForm;

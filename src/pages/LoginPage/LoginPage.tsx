@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { clearErrors, loginQuery } from '../../bll/loginUser/loginUser.slice';
+import { loginQuery } from '../../bll/loginUser/loginUser.slice';
 import { validationSchemaLogin } from '../../types/validationSchema';
 import { ILoginForm } from '../../types/interfaces';
 import LoginForm from '../../components/LoginForm/LoginForm';
@@ -20,10 +20,10 @@ function LoginPage() {
   };
 
   const onSubmitFormHandler = (values: ILoginForm) => {
-    dispatch(clearErrors());
     dispatch(loginQuery(values));
-    navigate('/');
+    navigate('/'); // refactor
   };
+
   return (
     <Formik
       initialValues={initialValues}

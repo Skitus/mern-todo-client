@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,9 @@ import './ForgotPasswordPage.scss';
 function ForgotPasswordPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userPasswordIsLoading, userErrors } = useSelector(editPasswordUserSelector);
+  const { userPasswordIsLoading, userError } = useSelector(editPasswordUserSelector);
+  const userData = useSelector(editPasswordUserSelector);
+  console.log('userData', userData);
 
   const initialValues: IForgotPasswordForm = {
     email: '',
@@ -22,10 +24,13 @@ function ForgotPasswordPage() {
 
   const onSubmitFormHandler = (values: IForgotPasswordForm) => {
     dispatch(editPasswordUserQuery(values));
-    if (!userPasswordIsLoading) {
-      navigate('/');
-    }
   };
+
+  useEffect(() => {
+    if (userError === '' && userPasswordIsLoading === false) {
+      navigate('/login');
+    }
+  }, [userPasswordIsLoading, userError]);
 
   return (
     <Formik
@@ -46,7 +51,7 @@ function ForgotPasswordPage() {
           values={values}
           errors={errors}
           isValid={isValid}
-          userErrors={userErrors}
+          userError={userError}
         />
       )}
     </Formik>
