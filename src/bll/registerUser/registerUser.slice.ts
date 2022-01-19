@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { IRegisterForm } from '../../types/interfaces';
 import http from '../../service/http';
-import { loginUser } from '../loginUser/loginUser.slice';
 
 export const registerQuery: any = createAsyncThunk(
   'registerUser/registerQuery',
@@ -13,23 +12,26 @@ export const registerUser = createSlice({
   initialState: {
     userIsLoading: true,
     userError: '',
+    isUserRegister: false,
   },
   reducers: {
-    clearError(state) {
-      state.userError = '';
+    clearIsUserFlag(state) {
+      state.isUserRegister = false;
     },
   },
   extraReducers: {
     [registerQuery.pending]: (state, action) => {
       state.userIsLoading = true;
+      state.userError = '';
+      state.isUserRegister = false;
     },
     [registerQuery.fulfilled]: (state, action) => {
-      if (action.payload.data.status === 200) {
+      if (action.payload.status === 200) {
         state.userIsLoading = false;
-        state.userError = '';
+        state.isUserRegister = true;
       } else {
         state.userIsLoading = false;
-        state.userError = action.payload.data.message;
+        state.userError = action.payload.message;
       }
     },
     [registerQuery.rejected]: (state, action) => {
@@ -38,6 +40,6 @@ export const registerUser = createSlice({
   },
 });
 
-export const { clearError } = registerUser.actions;
+export const { clearIsUserFlag } = registerUser.actions;
 
 export default registerUser.reducer;

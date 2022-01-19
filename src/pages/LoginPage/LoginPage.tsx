@@ -21,7 +21,7 @@ function LoginPage() {
 
   const onSubmitFormHandler = (values: ILoginForm) => {
     dispatch(loginQuery(values));
-    navigate('/'); // refactor
+    navigate('/');
   };
 
   return (

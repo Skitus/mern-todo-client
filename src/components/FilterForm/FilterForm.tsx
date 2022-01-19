@@ -66,7 +66,7 @@ function FilterForm() {
               />
             </Grid>
           </FormGroup>
-          <Grid className="search-button-wrapper" xs={12} md={12} lg={1}>
+          <Grid className="search-button-wrapper" item xs={12} md={12} lg={1}>
             <Button
               className="search-button"
               type="submit"

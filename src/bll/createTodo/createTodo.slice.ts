@@ -24,7 +24,7 @@ export const createTodo = createSlice({
       state.todosIsLoading = true;
     },
     [createTodoQuery.fulfilled]: (state, action) => {
-      state.todosData = action.payload.data;
+      state.todosData = action.payload;
       state.todosIsLoading = false;
     },
     [createTodoQuery.rejected]: (state, action) => {

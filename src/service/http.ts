@@ -22,19 +22,19 @@ class Http {
       todosPerPage: number,
     ) {
       if (!values) {
-        return await axios.get(`${this.BASE_URL_TODO}/`, {
+        return (await axios.get(`${this.BASE_URL_TODO}/`, {
           headers: {},
           params: {
             _id,
             page: todosCurrentPage,
             pageSize: todosPerPage,
           },
-        });
+        })).data;
       }
       if (values) {
         const status = getStatus(values.isComplete, values.isPublic);
         if (status) {
-          return await axios.get(`${this.BASE_URL_TODO}/`, {
+          return (await axios.get(`${this.BASE_URL_TODO}/`, {
             headers: {},
             params: {
               _id,
@@ -42,9 +42,9 @@ class Http {
               page: todosCurrentPage,
               pageSize: todosPerPage,
             },
-          });
+          })).data;
         }
-        return await axios.get(`${this.BASE_URL_TODO}/`, {
+        return (await axios.get(`${this.BASE_URL_TODO}/`, {
           headers: {},
           params: {
             _id,
@@ -52,33 +52,33 @@ class Http {
             page: todosCurrentPage,
             pageSize: todosPerPage,
           },
-        });
+        })).data;
       }
       return null;
     }
 
     async deleteTodo(_id: string) {
-      return await axios.delete(`${this.BASE_URL_TODO}/delete`, { data: { _id } });
+      return (await axios.delete(`${this.BASE_URL_TODO}/delete`, { data: { _id } })).data;
     }
 
     async createTodo(values: ITodoForm, _id: string) {
-      return await axios.post(`${this.BASE_URL_TODO}/create`, { ...values, _id });
+      return (await axios.post(`${this.BASE_URL_TODO}/create`, { ...values, _id })).data;
     }
 
     async editTodo(values: ITodoForm, _id: string) {
-      return await axios.put(`${this.BASE_URL_TODO}/update`, { ...values, _id });
+      return (await axios.put(`${this.BASE_URL_TODO}/update`, { ...values, _id })).data;
     }
 
     async editPasswordUser(values: IEditPasswordUserForm) {
-      return await axios.put(`${this.BASE_URL_AUTH}/edit-password`, { ...values });
+      return (await axios.put(`${this.BASE_URL_AUTH}/edit-password`, { ...values })).data;
     }
 
     async registryUser(values: IRegisterForm) {
-      return await axios.post(`${this.BASE_URL_AUTH}/register`, { ...values });
+      return (await axios.post(`${this.BASE_URL_AUTH}/register`, { ...values })).data;
     }
 
     async loginUser(values: ILoginForm) {
-      return await axios.post(`${this.BASE_URL_AUTH}/login`, { ...values });
+      return (await axios.post(`${this.BASE_URL_AUTH}/login`, { ...values })).data;
     }
 }
 

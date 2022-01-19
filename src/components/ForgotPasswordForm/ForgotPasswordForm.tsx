@@ -13,7 +13,7 @@ function ForgotPasswordForm({
 }: any) {
   return (
     <Grid className="forgot-password-wrapper" container justifyContent="space-around">
-      <Grid xs={11} sm={11} md={10} lg={10} container justifyContent="center">
+      <Grid item xs={11} sm={11} md={10} lg={10} container justifyContent="center">
         <Typography variant="h4" component="h4">
           Forgot password
         </Typography>

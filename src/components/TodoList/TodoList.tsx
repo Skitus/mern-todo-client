@@ -77,11 +77,12 @@ function TodoList() {
           </Grid>
           <Grid
             container
+            item
             lg={2}
             justifyContent="space-around"
             alignItems="flex-start"
           >
-            <Grid item container xs={5} md={5}>
+            <Grid container item xs={5} md={5}>
               <Button
                 className="edit-button"
                 size="large"
@@ -91,7 +92,7 @@ function TodoList() {
                 Edit
               </Button>
             </Grid>
-            <Grid item container xs={5} md={5}>
+            <Grid container item xs={5} md={5}>
               <Button
                 className="delete-button"
                 size="large"

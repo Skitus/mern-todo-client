@@ -12,32 +12,35 @@ export const editPasswordUser = createSlice({
   initialState: {
     userPasswordIsLoading: true,
     userError: '',
+    isUserChangePassword: false,
   },
   reducers: {
-    clearError(state) {
-      state.userError = '';
+    clearIsUserFlag(state) {
+      state.isUserChangePassword = false;
     },
   },
 
   extraReducers: {
     [editPasswordUserQuery.pending]: (state, action) => {
       state.userPasswordIsLoading = true;
+      state.userError = '';
+      state.isUserChangePassword = false;
     },
     [editPasswordUserQuery.fulfilled]: (state, action) => {
       if (action.payload.data.status === 200) {
         state.userPasswordIsLoading = false;
-        state.userError = '';
+        state.isUserChangePassword = true;
       } else {
         state.userPasswordIsLoading = false;
-        state.userError = action.payload.data.message;
+        state.userError = action.payload.message;
       }
     },
     [editPasswordUserQuery.rejected]: (state, action) => {
-      state.userPasswordIsLoading = false;
+      state.userPasswordIsLoading = true;
     },
   },
 });
 
-export const { clearError } = editPasswordUser.actions;
+export const { clearIsUserFlag } = editPasswordUser.actions;
 
 export default editPasswordUser.reducer;

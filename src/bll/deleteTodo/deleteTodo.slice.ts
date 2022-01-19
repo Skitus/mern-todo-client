@@ -3,10 +3,7 @@ import http from '../../service/http';
 
 export const deleteQuery: any = createAsyncThunk(
   'deleteTodos/fetchTodos',
-  async (id: string) => {
-    const res = await http.deleteTodo(id);
-    return res;
-  },
+  async (id: string) => { await http.deleteTodo(id); },
 );
 
 export const deleteTodo = createSlice({

@@ -23,28 +23,25 @@ export const loginUser = createSlice({
       state.userToken = '';
       localStorage.clear();
     },
-    clearError(state) {
-      state.userError = '';
-    },
   },
 
   extraReducers: {
     [loginQuery.pending]: (state, action) => {
       state.userIsLoading = true;
+      state.userError = '';
     },
     [loginQuery.fulfilled]: (state, action) => {
-      if (action.payload.data.status === 200) {
-        state.userToken = action.payload.data.token;
-        state.userId = action.payload.data.user;
-        state.userName = action.payload.data.username;
+      if (action.payload.status === 200) {
+        state.userToken = action.payload.token;
+        state.userId = action.payload.user;
+        state.userName = action.payload.username;
         localStorage.setItem('token', JSON.stringify(state.userToken));
         localStorage.setItem('userId', JSON.stringify(state.userId));
         localStorage.setItem('user_name', JSON.stringify(state.userName));
         state.userIsLoading = false;
-        state.userError = '';
       } else {
         state.userIsLoading = false;
-        state.userError = action.payload.data.message;
+        state.userError = action.payload.message;
       }
     },
     [loginQuery.rejected]: (state, action) => {

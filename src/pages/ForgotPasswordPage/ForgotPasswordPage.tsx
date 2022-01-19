@@ -5,16 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import { validationSchemaForgotPassword } from '../../types/validationSchema';
 import { IForgotPasswordForm } from '../../types/interfaces';
 import ForgotPasswordForm from '../../components/ForgotPasswordForm/ForgotPasswordForm';
-import { editPasswordUserQuery } from '../../bll/editPasswordUser/editPasswordUser.slice';
+import { clearIsUserFlag, editPasswordUserQuery } from '../../bll/editPasswordUser/editPasswordUser.slice';
 import { editPasswordUserSelector } from '../../bll/editPasswordUser/editPasswordUser.selector';
 import './ForgotPasswordPage.scss';
 
 function ForgotPasswordPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userPasswordIsLoading, userError } = useSelector(editPasswordUserSelector);
-  const userData = useSelector(editPasswordUserSelector);
-  console.log('userData', userData);
+  const
+    { userPasswordIsLoading,
+      userError,
+      isUserChangePassword,
+    } = useSelector(editPasswordUserSelector);
 
   const initialValues: IForgotPasswordForm = {
     email: '',
@@ -27,10 +29,11 @@ function ForgotPasswordPage() {
   };
 
   useEffect(() => {
-    if (userError === '' && userPasswordIsLoading === false) {
+    if (userError === '' && userPasswordIsLoading === false && isUserChangePassword === true) {
+      dispatch(clearIsUserFlag());
       navigate('/login');
     }
-  }, [userPasswordIsLoading, userError]);
+  }, [userPasswordIsLoading, userError, isUserChangePassword]);
 
   return (
     <Formik

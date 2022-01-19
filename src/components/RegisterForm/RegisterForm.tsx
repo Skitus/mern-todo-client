@@ -6,7 +6,7 @@ import './RegisterForm.scss';
 function RegisterForm({ handleChange, handleSubmit, values, errors, isValid, userError }: any) {
   return (
     <Grid className="register-wrapper" container justifyContent="space-around">
-      <Grid xs={11} sm={11} md={10} lg={10} container justifyContent="center">
+      <Grid item xs={11} sm={11} md={10} lg={10} container justifyContent="center">
         <Typography variant="h4" component="h4">
           Register
         </Typography>

@@ -19,7 +19,7 @@ function TodoForm({
 }: any) {
   return (
     <Grid className="todo-form-wrapper" container justifyContent="center">
-      <Grid container xs={11} sm={11} md={10} lg={10}>
+      <Grid container item xs={11} sm={11} md={10} lg={10}>
         <Typography className="caption" variant="h2" component="h6" align="center">
           {state ? 'Edit Todo' : 'Create new Todo'}
         </Typography>

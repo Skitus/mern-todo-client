@@ -1,14 +1,13 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { clearError, registerQuery } from '../../bll/registerUser/registerUser.slice';
+import { clearIsUserFlag, registerQuery } from '../../bll/registerUser/registerUser.slice';
 import { validationSchemaRegister } from '../../types/validationSchema';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { IRegisterForm } from '../../types/interfaces';
 import { registryUserSelector } from '../../bll/registerUser/registerUser.selector';
 import './RegisterPage.scss';
-import { loginUserSelector } from '../../bll/loginUser/loginUser.selector';
 
 function RegisterPage() {
   const dispatch = useDispatch();
@@ -19,17 +18,18 @@ function RegisterPage() {
     password: '',
     checkPassword: '',
   };
-  const { userIsLoading, userError } = useSelector(registryUserSelector);
+  const { userIsLoading, userError, isUserRegister } = useSelector(registryUserSelector);
 
   const onSubmitFormHandler = (values: IRegisterForm) => {
     dispatch(registerQuery(values));
   };
 
   useEffect(() => {
-    if (userError === '' && userIsLoading === false) {
+    if (userError === '' && userIsLoading === false && isUserRegister === true) {
+      dispatch(clearIsUserFlag());
       navigate('/login');
     }
-  }, [userIsLoading, userError]);
+  }, [userIsLoading, userError, isUserRegister]);
 
   return (
     <Formik

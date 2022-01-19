@@ -41,8 +41,8 @@ export const listOfTodos = createSlice({
       state.todosIsLoading = true;
     },
     [fetchTodos.fulfilled]: (state, action) => {
-      state.todosData = action.payload.data.todos;
-      state.todosTotalCount = action.payload.data.totalCount;
+      state.todosData = action.payload.todos;
+      state.todosTotalCount = action.payload.totalCount;
       state.todosIsLoading = false;
     },
     [fetchTodos.rejected]: (state, action) => {
