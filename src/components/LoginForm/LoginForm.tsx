@@ -65,7 +65,7 @@ function LoginForm({ handleChange, handleSubmit, values, errors, isValid, userEr
             </Link>
           </Grid>
           <Grid item xs={12} sm={12} md={3} lg={3}>
-            <Link to="/edit-password">
+            <Link to="/password-reset">
               <Button className="new-password-button" type="submit" variant="contained">Forgot password ?</Button>
             </Link>
           </Grid>

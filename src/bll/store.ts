@@ -5,6 +5,8 @@ import createTodo from './createTodo/createTodo.slice';
 import registerUser from './registerUser/registerUser.slice';
 import loginUser from './loginUser/loginUser.slice';
 import editPasswordUser from './editPasswordUser/editPasswordUser.slice';
+import resetPasswordUser from './resetPasswordUser/resetPasswordUser.slice';
+import verifyPasswordUser from './verifyPasswordUser/verifyPasswordUser.slice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
     registerUser,
     loginUser,
     editPasswordUser,
+    resetPasswordUser,
+    verifyPasswordUser,
   },
 });
 

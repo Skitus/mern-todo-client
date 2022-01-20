@@ -1,5 +1,13 @@
 import axios from 'axios';
-import { IEditPasswordUserForm, IFilterForm, ILoginForm, IRegisterForm, ITodoForm } from '../types/interfaces';
+import {
+  IEditPasswordUserForm,
+  IFilterForm,
+  ILoginForm,
+  IRegisterForm,
+  IResetPasswordUserForm,
+  ITodoForm,
+} from '../types/interfaces';
+import { verifyPasswordUserQuery } from '../bll/verifyPasswordUser/verifyPasswordUser.slice';
 
 const getStatus = (isComplete: boolean, isPublic: boolean):
     string | undefined => {
@@ -70,7 +78,15 @@ class Http {
     }
 
     async editPasswordUser(values: IEditPasswordUserForm) {
-      return (await axios.put(`${this.BASE_URL_AUTH}/edit-password`, { ...values })).data;
+      return (await axios.post(`${this.BASE_URL_AUTH}/password-reset`, { ...values })).data;
+    }
+
+    async resetPasswordUser(values: IResetPasswordUserForm) {
+      return (await axios.post(`${this.BASE_URL_AUTH}/password-reset/`, { ...values })).data; // put some token and id in url
+    }
+
+    async verifyPasswordUser(id: string, token: string) {
+      return (await axios.get(`${this.BASE_URL_AUTH}/password-reset/${id}/${token}`)).data;
     }
 
     async registryUser(values: IRegisterForm) {

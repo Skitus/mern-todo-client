@@ -3,7 +3,7 @@ import { Button, Grid, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import './ForgotPasswordForm.scss';
 
-function ForgotPasswordForm({
+function ResetPasswordForm({
   handleChange,
   handleSubmit,
   values,
@@ -17,7 +17,7 @@ function ForgotPasswordForm({
         <Typography variant="h4" component="h4">
           Forgot password
         </Typography>
-        <TextField
+        {/*        <TextField
           className="email-input"
           id="email"
           name="email"
@@ -31,8 +31,8 @@ function ForgotPasswordForm({
         <Typography className="error" variant="h6" component="h2" align="center">
           {errors.email}
         </Typography>
-        )}
-        {/*
+        )} */}
+
         <TextField
           className="new-password-input"
           id="new-password"
@@ -63,7 +63,7 @@ function ForgotPasswordForm({
         <Typography className="error" variant="h6" component="h2" align="center">
           {errors.checkPassword}
         </Typography>
-        )} */}
+        )}
 
         {
             userError && (
@@ -74,18 +74,21 @@ function ForgotPasswordForm({
         }
 
         <Grid container justifyContent="space-between">
+          {/*
           <Grid item xs={12} sm={12} md={3} lg={3}>
             <Link to="/register">
-              <Button className="register-button" type="submit" variant="contained">Register</Button>
+              <Button className="register-button"
+              type="submit" variant="contained">Register</Button>
             </Link>
           </Grid>
           <Grid item xs={12} sm={12} md={3} lg={3}>
             <Link to="/login">
-              <Button className="sign-in-button" type="submit" variant="contained">
+              <Button className="sign-in-button"
+              type="submit" variant="contained">
                 Sign in
               </Button>
             </Link>
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} sm={12} md={3} lg={3}>
             <Button
               className="new-password-button"
@@ -103,4 +106,4 @@ function ForgotPasswordForm({
   );
 }
 
-export default ForgotPasswordForm;
+export default ResetPasswordForm;

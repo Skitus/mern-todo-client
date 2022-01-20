@@ -8,8 +8,11 @@ export interface ITodoForm {
 }
 
 export interface IEditPasswordUserForm {
-    checkPassword?: string,
     email: string,
+}
+
+export interface IResetPasswordUserForm {
+    checkPassword?: string,
     newPassword: string
 }
 

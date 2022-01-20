@@ -1,23 +1,22 @@
 import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { validationSchemaForgotPassword } from '../../types/validationSchema';
 import { IForgotPasswordForm } from '../../types/interfaces';
-import ForgotPasswordForm from '../../components/ForgotPasswordForm/ForgotPasswordForm';
-import { clearIsUserFlag, editPasswordUserQuery } from '../../bll/editPasswordUser/editPasswordUser.slice';
-import { editPasswordUserSelector } from '../../bll/editPasswordUser/editPasswordUser.selector';
-import './ForgotPasswordPage.scss';
+import './ResetPasswordPage.scss';
 import ResetPasswordForm from '../../components/ForgotPasswordForm/ResetPassword';
+import { verifyPasswordUserQuery } from '../../bll/verifyPasswordUser/verifyPasswordUser.slice';
 
-function ForgotPasswordPage() {
+function ResetPasswordPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const
+  const { id, token } = useParams<any>();
+  /*  const
     { userPasswordIsLoading,
       userError,
       isUserChangePassword,
-    } = useSelector(editPasswordUserSelector);
+    } = useSelector(editPasswordUserSelector); */
 
   const initialValues: IForgotPasswordForm = {
     email: '',
@@ -26,15 +25,17 @@ function ForgotPasswordPage() {
   };
 
   const onSubmitFormHandler = (values: IForgotPasswordForm) => {
-    dispatch(editPasswordUserQuery(values));
+    /*    dispatch(editPasswordUserQuery(values)); */
   };
 
   useEffect(() => {
-    if (userError === '' && userPasswordIsLoading === false && isUserChangePassword === true) {
+    dispatch(verifyPasswordUserQuery({ id, token }));
+    /*    if (userError === '' && userPasswordIsLoading
+    === false && isUserChangePassword === true) {
       dispatch(clearIsUserFlag());
       navigate('/login');
-    }
-  }, [userPasswordIsLoading, userError, isUserChangePassword]);
+    } */
+  }, []);
 
   return (
     <Formik
@@ -49,16 +50,16 @@ function ForgotPasswordPage() {
         errors,
         isValid,
       }) => (
-        <ForgotPasswordForm
+        <ResetPasswordForm
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           values={values}
           errors={errors}
           isValid={isValid}
-          userError={userError}
+/*          userError={userError} */
         />
       )}
     </Formik>
   );
 }
-export default ForgotPasswordPage;
+export default ResetPasswordPage;

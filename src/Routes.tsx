@@ -8,6 +8,7 @@ import Login from './pages/LoginPage/LoginPage';
 import { loginUserSelector } from './bll/loginUser/loginUser.selector';
 import Page404 from './components/Page404/Page404';
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage';
 
 function Routers() {
   const { userToken } = useSelector(loginUserSelector);
@@ -27,7 +28,8 @@ function Routers() {
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/edit-password" element={<ForgotPasswordPage />} />
+          <Route path="/password-reset" element={<ForgotPasswordPage />} />
+          <Route path="/password-reset/:id/:token" element={<ResetPasswordPage />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       )

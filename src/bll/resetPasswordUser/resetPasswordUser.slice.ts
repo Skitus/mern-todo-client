@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IEditPasswordUserForm } from '../../types/interfaces';
+import { IResetPasswordUserForm } from '../../types/interfaces';
 import http from '../../service/http';
 
-export const editPasswordUserQuery: any = createAsyncThunk(
-  'editPasswordUser/editPasswordUserQuery',
-  async (values: IEditPasswordUserForm) => await http.editPasswordUser(values),
+export const resetPasswordUserQuery: any = createAsyncThunk(
+  'resetPasswordUser/resetPasswordUserQuery',
+  async (values: IResetPasswordUserForm) => await http.resetPasswordUser(values),
 );
 
-export const editPasswordUser = createSlice({
-  name: 'editPasswordUser',
+export const resetPasswordUser = createSlice({
+  name: 'resetPasswordUser',
   initialState: {
     userPasswordIsLoading: true,
     userError: '',
@@ -21,12 +21,12 @@ export const editPasswordUser = createSlice({
   },
 
   extraReducers: {
-    [editPasswordUserQuery.pending]: (state, action) => {
+    [resetPasswordUserQuery.pending]: (state, action) => {
       state.userPasswordIsLoading = true;
       state.userError = '';
       state.isUserChangePassword = false;
     },
-    [editPasswordUserQuery.fulfilled]: (state, action) => {
+    [resetPasswordUserQuery.fulfilled]: (state, action) => {
       console.log('action.payload', action.payload);
       if (action.payload.data.status === 200) {
         state.userPasswordIsLoading = false;
@@ -36,12 +36,12 @@ export const editPasswordUser = createSlice({
         state.userError = action.payload.message;
       }
     },
-    [editPasswordUserQuery.rejected]: (state, action) => {
+    [resetPasswordUserQuery.rejected]: (state, action) => {
       state.userPasswordIsLoading = true;
     },
   },
 });
 
-export const { clearIsUserFlag } = editPasswordUser.actions;
+export const { clearIsUserFlag } = resetPasswordUser.actions;
 
-export default editPasswordUser.reducer;
+export default resetPasswordUser.reducer;

@@ -32,7 +32,7 @@ export const validationSchemaForgotPassword = yup.object({
   email: yup
     .string()
     .required('Email is required'),
-  newPassword: yup
+  /* newPassword: yup
     .string()
     .required('Password is required'),
   checkPassword: yup.string().required('This field is required').when('newPassword', {
@@ -40,8 +40,9 @@ export const validationSchemaForgotPassword = yup.object({
     then: yup.string().oneOf(
       [yup.ref('newPassword')],
       'Both password need to be the same',
-    ),
-  }),
+    ), */
+
+/*  }), */
 });
 
 export const validationSchemaTodo = yup.object({
