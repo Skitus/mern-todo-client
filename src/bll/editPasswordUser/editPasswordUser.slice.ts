@@ -10,13 +10,13 @@ export const editPasswordUserQuery: any = createAsyncThunk(
 export const editPasswordUser = createSlice({
   name: 'editPasswordUser',
   initialState: {
-    userPasswordIsLoading: true,
+    userPasswordIsLoading: false,
     userError: '',
-    isUserChangePassword: false,
+    userSuccessMessage: '',
   },
   reducers: {
-    clearIsUserFlag(state) {
-      state.isUserChangePassword = false;
+    clearSuccessMessage(state) {
+      state.userSuccessMessage = '';
     },
   },
 
@@ -24,13 +24,12 @@ export const editPasswordUser = createSlice({
     [editPasswordUserQuery.pending]: (state, action) => {
       state.userPasswordIsLoading = true;
       state.userError = '';
-      state.isUserChangePassword = false;
+      state.userSuccessMessage = '';
     },
     [editPasswordUserQuery.fulfilled]: (state, action) => {
-      console.log('action.payload', action.payload);
-      if (action.payload.data.status === 200) {
+      if (action.payload.status === 200) {
         state.userPasswordIsLoading = false;
-        state.isUserChangePassword = true;
+        state.userSuccessMessage = action.payload.message;
       } else {
         state.userPasswordIsLoading = false;
         state.userError = action.payload.message;
@@ -42,6 +41,6 @@ export const editPasswordUser = createSlice({
   },
 });
 
-export const { clearIsUserFlag } = editPasswordUser.actions;
+export const { clearSuccessMessage } = editPasswordUser.actions;
 
 export default editPasswordUser.reducer;

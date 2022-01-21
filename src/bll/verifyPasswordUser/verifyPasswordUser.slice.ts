@@ -22,7 +22,7 @@ export const verifyPasswordUser = createSlice({
     },
     [verifyPasswordUserQuery.fulfilled]: (state, action) => {
       console.log('action.payload', action.payload);
-      if (action.payload.data.status === 200) {
+      if (action.payload.status === 200) {
         state.userPasswordIsLoading = false;
         state.userIsValidUrl = true;
       } else {
@@ -36,6 +36,5 @@ export const verifyPasswordUser = createSlice({
     },
   },
 });
-
 
 export default verifyPasswordUser.reducer;

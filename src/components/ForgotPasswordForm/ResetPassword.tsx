@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Grid, TextField, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
 import './ForgotPasswordForm.scss';
 
 function ResetPasswordForm({
@@ -17,26 +16,12 @@ function ResetPasswordForm({
         <Typography variant="h4" component="h4">
           Forgot password
         </Typography>
-        {/*        <TextField
-          className="email-input"
-          id="email"
-          name="email"
-          onChange={handleChange('email')}
-          value={values.email}
-          label="Email"
-          variant="standard"
-        />
-
-        {errors.email && (
-        <Typography className="error" variant="h6" component="h2" align="center">
-          {errors.email}
-        </Typography>
-        )} */}
 
         <TextField
           className="new-password-input"
           id="new-password"
           name="new-password"
+          type="password"
           onChange={handleChange('newPassword')}
           value={values.newPassword}
           label="New password"
@@ -53,6 +38,7 @@ function ResetPasswordForm({
           className="check-password-input"
           id="checkPassword"
           name="checkPassword"
+          type="password"
           onChange={handleChange('checkPassword')}
           value={values.checkPassword}
           label="Check password"
@@ -74,22 +60,7 @@ function ResetPasswordForm({
         }
 
         <Grid container justifyContent="space-between">
-          {/*
-          <Grid item xs={12} sm={12} md={3} lg={3}>
-            <Link to="/register">
-              <Button className="register-button"
-              type="submit" variant="contained">Register</Button>
-            </Link>
-          </Grid>
-          <Grid item xs={12} sm={12} md={3} lg={3}>
-            <Link to="/login">
-              <Button className="sign-in-button"
-              type="submit" variant="contained">
-                Sign in
-              </Button>
-            </Link>
-          </Grid> */}
-          <Grid item xs={12} sm={12} md={3} lg={3}>
+          <Grid item xs={12} sm={12} md={3} lg={12}>
             <Button
               className="new-password-button"
               type="submit"

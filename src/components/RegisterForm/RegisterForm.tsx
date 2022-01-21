@@ -44,6 +44,7 @@ function RegisterForm({ handleChange, handleSubmit, values, errors, isValid, use
           className="password-input"
           id="password"
           name="password"
+          type="password"
           onChange={handleChange('password')}
           value={values.password}
           label="Password"
@@ -60,6 +61,7 @@ function RegisterForm({ handleChange, handleSubmit, values, errors, isValid, use
           className="check-password-input"
           id="checkPassword"
           name="checkPassword"
+          type="password"
           onChange={handleChange('checkPassword')}
           value={values.checkPassword}
           label="Check password"

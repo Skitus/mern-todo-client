@@ -36,6 +36,9 @@ export interface IRegisterForm {
 
 export interface IForgotPasswordForm {
     email: string,
+}
+
+export interface IResetPasswordForm {
     newPassword: string,
-    checkPassword?: string
+    checkPassword: string,
 }

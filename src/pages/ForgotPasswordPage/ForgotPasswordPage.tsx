@@ -1,28 +1,24 @@
 import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { validationSchemaForgotPassword } from '../../types/validationSchema';
 import { IForgotPasswordForm } from '../../types/interfaces';
 import ForgotPasswordForm from '../../components/ForgotPasswordForm/ForgotPasswordForm';
-import { clearIsUserFlag, editPasswordUserQuery } from '../../bll/editPasswordUser/editPasswordUser.slice';
+import { clearSuccessMessage, editPasswordUserQuery } from '../../bll/editPasswordUser/editPasswordUser.slice';
 import { editPasswordUserSelector } from '../../bll/editPasswordUser/editPasswordUser.selector';
 import './ForgotPasswordPage.scss';
-import ResetPasswordForm from '../../components/ForgotPasswordForm/ResetPassword';
 
 function ForgotPasswordPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const
-    { userPasswordIsLoading,
+    {
+      userPasswordIsLoading,
       userError,
-      isUserChangePassword,
+      userSuccessMessage,
     } = useSelector(editPasswordUserSelector);
 
   const initialValues: IForgotPasswordForm = {
     email: '',
-    newPassword: '',
-    checkPassword: '',
   };
 
   const onSubmitFormHandler = (values: IForgotPasswordForm) => {
@@ -30,11 +26,8 @@ function ForgotPasswordPage() {
   };
 
   useEffect(() => {
-    if (userError === '' && userPasswordIsLoading === false && isUserChangePassword === true) {
-      dispatch(clearIsUserFlag());
-      navigate('/login');
-    }
-  }, [userPasswordIsLoading, userError, isUserChangePassword]);
+    dispatch(clearSuccessMessage());
+  }, []);
 
   return (
     <Formik
@@ -56,6 +49,8 @@ function ForgotPasswordPage() {
           errors={errors}
           isValid={isValid}
           userError={userError}
+          userSuccessMessage={userSuccessMessage}
+          userPasswordIsLoading={userPasswordIsLoading}
         />
       )}
     </Formik>

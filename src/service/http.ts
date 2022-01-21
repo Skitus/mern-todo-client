@@ -4,10 +4,8 @@ import {
   IFilterForm,
   ILoginForm,
   IRegisterForm,
-  IResetPasswordUserForm,
   ITodoForm,
 } from '../types/interfaces';
-import { verifyPasswordUserQuery } from '../bll/verifyPasswordUser/verifyPasswordUser.slice';
 
 const getStatus = (isComplete: boolean, isPublic: boolean):
     string | undefined => {
@@ -18,10 +16,9 @@ const getStatus = (isComplete: boolean, isPublic: boolean):
 };
 
 class Http {
-    // https://mern-pet-project-todo.herokuapp.com
-    readonly BASE_URL_TODO = 'http://localhost:5000/api/todos';
+    readonly BASE_URL_TODO = 'https://mern-pet-project-todo.herokuapp.com/api/todos';
 
-    readonly BASE_URL_AUTH = 'http://localhost:5000/api/user';
+    readonly BASE_URL_AUTH = 'https://mern-pet-project-todo.herokuapp.com/api/user';
 
     async getAllTodos(
       _id: string,
@@ -81,8 +78,8 @@ class Http {
       return (await axios.post(`${this.BASE_URL_AUTH}/password-reset`, { ...values })).data;
     }
 
-    async resetPasswordUser(values: IResetPasswordUserForm) {
-      return (await axios.post(`${this.BASE_URL_AUTH}/password-reset/`, { ...values })).data; // put some token and id in url
+    async resetPasswordUser(values: any, id: string, token: string) {
+      return (await axios.post(`${this.BASE_URL_AUTH}/password-reset/${id}/${token}`, { ...values })).data;
     }
 
     async verifyPasswordUser(id: string, token: string) {

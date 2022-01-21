@@ -29,6 +29,7 @@ function LoginForm({ handleChange, handleSubmit, values, errors, isValid, userEr
           className="password-input"
           id="password"
           name="password"
+          type="password"
           onChange={handleChange('password')}
           value={values.password}
           label="Password"
